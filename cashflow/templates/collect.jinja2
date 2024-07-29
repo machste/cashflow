@@ -1,0 +1,59 @@
+{% extends "layout.jinja2" %}
+
+{% block content %}
+<div class="container my-5">
+  <h1>Kosten Erfassen</h1>
+
+  <form class="my-5" name="collect" method="post">
+    <div class="mb-3">
+      <label class="form-label" for="reporter">Erfasst durch</label>
+      <input class="form-control" id="reporter" name="reporter" value="{{ user_dnames.get(form.reporter.value) }}" readonly disabled />
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="payer">Bezahlt von</label>
+      <select class="form-select" id="payer" name="payer">
+        {% for id, dname in user_dnames.items() %}
+          <option {{ 'selected' if form.payer.value == id }} value="{{ id }}">{{ dname }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="date">Datum</label>
+      <input class="form-control" id="date" name="date" type="date" value="{{ form.date.value }}" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="amount-group">Betrag</label>
+      <div class="input-group has-validation" id="amount-group">
+        <input class="form-control{{ form.amount.get_valid_cls() | prefix(' ') }}" id="amount" name="amount" type="number" min=0 step=0.01 value="{{ '%.2f' % form.amount.value }}" />
+        <select class="form-select flex-grow-0 w-auto{{ form.currency.get_valid_cls() | prefix(' ') }}" id="currency" name="currency">
+          {% for id, code in curr_codes.items() %}
+          <option {{ 'selected' if form.currency.value == id }} value="{{ id }}">{{ code }}</option>
+        {% endfor %}
+        </select>
+        <div class="invalid-feedback">{{ form.amount.err_msg }}</div>
+        <div class="invalid-feedback">{{ form.currency.err_msg }}</div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="category">Kategorie</label>
+      <select class="form-select" id="category" name="category">
+        {% for id, name in cat_names.items() %}
+          <option {{ 'selected' if form.category.value == id }} value="{{ id }}">{{ name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="comment">Bemerkung</label>
+      <textarea class="form-control" id="comment" name="comment" rows="3">{{ form.comment.value }}</textarea>
+    </div>
+    <div class="form-check mb-3">
+      <input class="form-check-input" id="private" name="private" type="checkbox" value="private" {{ 'checked' if form.private.value }}>
+      <label class="form-check-label" for="private">Private Kosten</label>
+    </div>
+    <div class="mb-3">
+      <button class="btn btn-primary" type="submit" name="form.submitted">Erfassen</button>
+    </div>
+  </form>
+</div>
+
+{% endblock content %}

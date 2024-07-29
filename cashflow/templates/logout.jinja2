@@ -1,0 +1,11 @@
+{% extends "layout.jinja2" %}
+
+{% block content %}
+<div class="container my-5">
+  <h1>Auf Wiedersehen!</h1>
+  <p class="lead">
+    {{ display_name }}, ich freue mich, dich bald wieder auf <a href="{{ request.route_url('home') }}">CashFlow</a>
+    begrüssen zu dürfen.
+  </p>
+</div>
+{% endblock content %}

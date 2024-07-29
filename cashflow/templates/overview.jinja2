@@ -1,0 +1,48 @@
+{% extends "layout.jinja2" %}
+
+{% block content %}
+<div class="container my-5">
+  <h1>Übersicht</h1>
+  {% if recent_expenses | count > 0 %}
+    <div class="table-responsive mt-4">
+      <table class="table table-hover">
+        <caption>Liste der kürzlich eingetragenen Kosten</caption>
+        <thead>
+          <tr>
+            <th scope="col">Datum</th>
+            <th scope="col">Bezahlt von</th>
+            <th scope="col">Betrag</th>
+            <th scope="col">Kategorie</th>
+            <th scope="col">Privat</th>
+            <th scope="col">Bemerkung</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for expense in recent_expenses %}
+            <tr>
+              <td>{{ expense.date }}</th>
+              <td>{{ expense.payer.display_name }}</td>
+              <td>{{ '%.2f' % expense.amount }} CHF</td>
+              <td>{{ expense.category.name }}</td>
+              <td>
+                {% if expense.private %}
+                  <i class="bi bi-person-fill-lock"></i>
+                {% endif %}
+              </td>
+              <td>{{ expense.comment }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="alert alert-warning d-flex align-items-center my-4" role="alert">
+      <i class="bi bi-exclamation-triangle-fill flex-shrink-0 alert-icon"></i>
+      <div>
+        Es wurden noch keine Kosten erfasst!
+      </div>
+    </div>
+  {% endif %}
+
+</div>
+{% endblock content %}
