@@ -1,0 +1,33 @@
+{% extends "layout.jinja2" %}
+
+{% block content %}
+<div class="container content">
+  <h1>Währungen Verwalten</h1>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <caption>Liste aller registrierten Währungen</caption>
+      <thead>
+        <tr>
+          <th scope="col">Kürzel</th>
+          <th scope="col">Name</th>
+          <th scope="col">Kurs</th>
+          <th scope="col">Datum</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for currency in currencies %}
+          <tr>
+            <td>{{ currency.code }}</td>
+            <td>{{ currency.name }}</td>
+            <td>{{ "%.3f" % currency.rate }}</td>
+            <td>{{ currency.date }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% if request.has_permission('administrate') %}
+    <a class="btn btn-primary" href="{{ request.route_url('currencies_update') }}">Devisenkurse aktualisieren</a>
+  {% endif %}
+</div>
+{% endblock content %}

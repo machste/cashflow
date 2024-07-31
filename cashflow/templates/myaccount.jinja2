@@ -1,9 +1,9 @@
 {% extends "layout.jinja2" %}
 
 {% block content %}
-<div class="container my-5">
+<div class="container content">
   <h1>Mein Profil</h1>
-  <form class="py-4" id="form" name="myaccount" method="post" novalidate>
+  <form id="form" name="myaccount" method="post" novalidate>
     <div class="mb-2">
       <label class="form-label" for="firstname">Vorname</label>
       <input class="form-control{{ form.firstname.get_valid_cls() | prefix(' ') }}" id="firstname" name="firstname" value="{{ form.firstname.value }}" autocomplete="off"/>

@@ -21,6 +21,8 @@ def includeme(config):
     config.add_route('users', '/users')
     config.add_route('user_add', '/user/add')
     config.add_route('categories', '/categories')
+    config.add_route('currencies', '/currencies')
+    config.add_route('currencies_update', '/currencies/update')
     config.add_route('myaccount', '/myaccount')
     config.add_route('settings', '/settings')
     config.add_route('login', '/login')

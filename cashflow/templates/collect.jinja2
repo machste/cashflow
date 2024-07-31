@@ -1,10 +1,9 @@
 {% extends "layout.jinja2" %}
 
 {% block content %}
-<div class="container my-5">
+<div class="container content">
   <h1>Kosten Erfassen</h1>
-
-  <form class="my-5" name="collect" method="post">
+  <form name="collect" method="post">
     <div class="mb-3">
       <label class="form-label" for="reporter">Erfasst durch</label>
       <input class="form-control" id="reporter" name="reporter" value="{{ user_dnames.get(form.reporter.value) }}" readonly disabled />

@@ -12,3 +12,6 @@ class Currency(Base):
     rate = Column(Double, nullable=False, server_default='1.0')
     date = Column(DateTime, nullable=False, server_default=func.now())
 
+    def __str__(self):
+        return f'{self.code} (rate: {self.rate})'
+
