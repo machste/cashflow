@@ -18,6 +18,7 @@ Data*.fs*
 .*.sw?
 .sw?
 .DS_Store
+.vscode/
 coverage
 test
 *.sqlite
